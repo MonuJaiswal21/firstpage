@@ -3,15 +3,19 @@
     "name":"my First Extension",
     "description":"my First extension is for injecting script inside google.com",
     "version":"1.0.0",
-    "web_accessible_resoureces": [{
-        "resources": ["images/logo.png"],
-        "matches": ["https://*.google.com/*"]
-    }],
+    "action": {
+        "default_title":"my first extension",
+        "default_popup":"popup.html"
+    },
+    "permissions":[
+        "tabs","activeTab"
+    ],
     "content_scripts": [
         {
             "matches": ["https://*.google.com/*"],
             "run_at": "document_end",
+            "css": ["content-scripts.css"],
             "js": ["content-script.js"]
         }
-    ]
-}
+    ] 
+} 
