@@ -31,3 +31,38 @@ function openLoginPopup(){
         
     }
  });
+
+ setTimeout(()=>{
+    let btn = document.createElement("button");
+    btn.innerHTML = "click to send message";
+    btn.style.position = "absolute";
+    btn.style.top = "60px";
+    btn.style.left = "20px";
+    btn.style.cursor = "pointer";
+    btn.style.color = "red";
+    btn.style.zIndex = 999999;
+    btn.addEventListener("click",function(){
+        
+        chrome.runtime.sendMessage({"form":"content","message":"Good Morning"},(message)=>{
+            console.log(message);
+        });
+
+//    fetch("https://dummyjson.com/quotes")
+//     .then(response => response.json())
+//     .then(data =>{
+//         console.log(data);
+//     })
+
+    });
+ document.body.appendChild(btn);
+},2000);
+
+ chrome.runtime.onMessage.addListener((message,sender,sendResponse)=>{
+    if(result.form == "content"){
+        console.log(result.message);
+        sendResponse("Form Background"+ Math.random());
+ 
+    }else if(result.form == "popup"){
+
+    }
+ })

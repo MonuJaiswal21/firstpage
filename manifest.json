@@ -3,12 +3,20 @@
     "name":"my First Extension",
     "description":"my First extension is for injecting script inside google.com",
     "version":"1.0.0",
+    "web_accessible_resources": [{
+        "resources": ["images/logo.png"],
+        "matches": ["https://*.google.com/*"] 
+    }],
     "action": {
         "default_title":"my first extension",
         "default_popup":"popup.html"
     },
+   
+    "background":{
+        "service_worker":"background.js"
+    },
     "permissions":[
-        "tabs","activeTab","storage"
+        "tabs","activeTab","storage","contextMenus"
     ],
     "content_scripts": [
         {
@@ -21,6 +29,12 @@
             "matches": ["https://*.flipkart.com/*"],
             "run_at": "document_end",           
             "js": ["flip-content-script.js"]
+        },
+        {
+            "matches": ["https://*.google.com/*"],
+            "run_at": "document_end",
+            "js": ["content-script.js"]
         }
     ] 
 } 
+
